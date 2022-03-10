@@ -11,9 +11,15 @@ After summing the numbers, return the sum.
 You can assume that the 2nd number passed in will always be greater than the first and that the two numbers will not be the same
 Note: This problem should account for negative number input
 */
+function sumOfOdds(num1, num2) {
+    let sum = 0;
+    for (let i = num1; i <= num2; i++) {
+        if (i % 2 > 0) {
 
-function sumOfOdds(){
-
+            sum += i;
+        }
+    }
+    return sum;
 }
 
 /* console.logs to test */
@@ -30,8 +36,12 @@ For exmaple arraySubtract([7,9],[2,6]) should return [5,3]
 You can assume the arrays that are being input are of the same length
 */
 
-function arraySubtract(){
-
+function arraySubtract(arr1, arr2) {
+    let arr = [];
+    for (let i in arr1) {
+        arr.push(arr1[i] - arr2[i]);
+    }
+    return arr;
 }
 
 /* console.logs to test */
@@ -49,8 +59,14 @@ Add the second string to the end of the array
 Return the modified array
 */
 
-function surroundArray(){
-
+function surroundArray(arr, str1, str2) {
+    let newArray = [];
+    newArray.push(str1);
+    for (let i in arr) {
+        newArray.push(arr[i]);
+    }
+    newArray.push(str2);
+    return newArray;
 }
 
 /* console.logs to test */
@@ -67,8 +83,18 @@ If there is nothing in the array, return an empty string ('')
 You can assume that no two strings will have the same length in the array
 */
 
-function longestString(){
-    
+function longestString(strArray) {
+    let longestIndex = 0;
+    let longestLen = 0;
+
+    for (let i in strArray) {
+        const word = strArray[i] + "";
+        if (word.length > longestLen) {
+            longestIndex = i;
+            longestLen = word.length;
+        }
+    }
+    return strArray[longestIndex];
 }
 
 /* console.logs to test */
@@ -85,9 +111,30 @@ If the letter in the original string is uppercase the letter in the output strin
 Do NOT use replaceAll or similar string methods.  If you are unsure what that means, ask before you use a string method!  (toUpperCase() and toLowerCase() should be all you need if anything)
 */
 
-function sToR(){
-
+function sToR(str) {
+    let letters = (str + "").split("");
+    let retString = "";
+    for (let i in letters) {
+        switch (letters[i]) {
+            case "s":
+                retString += "r";
+                break;
+            case "S":
+                retString += "R";
+                break;
+            case "r":
+                retString += "s";
+                break;
+            case "R":
+                retString += "S";
+                break;
+            default:
+                retString += letters[i];
+        }
+    }
+    return retString;
 }
+
 
 /* console.logs to test */
 console.log("sToR");
@@ -102,8 +149,11 @@ Write a function divisibleBy4And7 that takes in a number and returns true if it 
 If it is not, return false.
 */
 
-function divisibleBy4And7(){
+function divisibleBy4And7(num) {
+    if (num % 4 == 0 && num % 7 == 0)
+        return true;
 
+    return false;
 }
 
 /* console.logs to test */
@@ -119,9 +169,9 @@ Write a function exclamationAndQuestion that takes in a string
 return true if the string contains both an exclamation point (!) AND a question mark (?)
 Return false if otherwise
 */
-
-function exclamationAndQuestion(){
-    
+function exclamationAndQuestion(str) {
+    str += "";
+    return (str.indexOf("!") >= 0 && str.indexOf("?") >= 0);
 }
 
 /* console.logs to test */
@@ -138,9 +188,19 @@ No need to add the count of A and B together.  Again, we want an array with the 
 Your function should account for both cases (upper and lower) of each letter.
 */
 
-function countAB(){
-
+function countAB(str) {
+    const letters = (str + "").toUpperCase().split("");
+    let count = [0, 0];
+    for (let i in letters) {
+        if (letters[i] == 'A') {
+            count[0]++;
+        } else if (letters[i] == 'B') {
+            count[1]++;
+        }
+    }
+    return count;
 }
+
 
 /* console.logs to test */
 console.log("countAB");
@@ -157,10 +217,19 @@ Finally, return your modified array.
 Example: addStringIfLastS(['test', 'testing', 'testings'], 'TEST') => ['test', 'testing', 'testingsTEST']
 */
 
-function addStringIfLastS(){
-
+function addStringIfLastS(arr, str) {
+    let newArray = [];
+    for (let i in arr) {
+        const s = arr[i] + "";
+        const len = s.length;
+        if (s.toUpperCase().charAt(len - 1) == 'S') {
+            newArray.push(s + str);
+        } else {
+            newArray.push(s);
+        }
+    }
+    return newArray;
 }
-
 /* console.logs to test */
 console.log("addStringIfLastS");
 console.log("////////////////////////////////////////////////////////////////////////////\n");
@@ -176,9 +245,53 @@ If the array is shorter than length 2, return undefined to the user
 You can assume that every number in the array will be unique
 */
 
-function twoSmallest(){
+function twoSmallest(smArray){
+    if (arr.length < 2)
+    return undefined;
+let num1 = arr[0];
 
+for (let i in arr)
+{
+    const num = arr[i];
+    if (num < num1)
+    {
+        num1 = num;
+    }
 }
+let num2 = 9999999;
+for (let i in arr)
+{
+    const num = arr[i];
+    if (num < num2 && num >num1)
+    {
+        num2 = num;
+    }
+}
+let smallest = [0, 0];
+smallest[0] =num1;
+smallest[1] =num2;
+
+return smallest;
+}
+
+
+
+
+
+
+
+
+
+
+
+  /* Write a function called twoSmallest that takes in a single array of numbers as a parameter
+   and returns the smallest 
+  two numbers in the following array format where the smallest number always comes before the 
+  2nd smallest number (ie, the bigger number should come second):
+    [smallestNumber, secondSmallestNumber]
+    If the array is shorter than length 2, return undefined to the user
+    You can assume that every number in the array will be unique*/
+
 
 /* console.logs to test */
 console.log("twoSmallest");
